@@ -1,0 +1,169 @@
+{
+    "_version": "1.42.0",
+    "sap.app": {
+        "id": "mtsmidoc",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "0.0.1"
+        },
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "resources": "resources.json",
+        "sourceTemplate": {
+            "id": "@sap/generator-fiori:ovp",
+            "version": "1.11.2",
+            "toolsId": "04756ef3-031c-4fc1-8349-c81abf8d0f94"
+        },
+        "dataSources": {
+            "mainService": {
+                "uri": "/sap/opu/odata/sap/ZMT_SM_C_IDOC_DSHB_CDS/",
+                "type": "OData",
+                "settings": {
+                    "annotations": [
+                        "ZMT_SM_C_IDOC_DSHB_CDS_VAN",
+                        "annotation"
+                    ],
+                    "localUri": "localService/metadata.xml",
+                    "odataVersion": "2.0"
+                }
+            },
+            "ZMT_SM_C_IDOC_DSHB_CDS_VAN": {
+                "uri": "/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='ZMT_SM_C_IDOC_DSHB_CDS_VAN',Version='0001')/$value/",
+                "type": "ODataAnnotation",
+                "settings": {
+                    "localUri": "localService/ZMT_SM_C_IDOC_DSHB_CDS_VAN.xml"
+                }
+            },
+            "annotation": {
+                "type": "ODataAnnotation",
+                "uri": "annotations/annotation.xml",
+                "settings": {
+                    "localUri": "annotations/annotation.xml"
+                }
+            }
+        }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        }
+    },
+    "sap.ui5": {
+        "flexEnabled": true,
+        "dependencies": {
+            "minUI5Version": "1.102.8",
+            "libs": {
+                "sap.m": {},
+                "sap.ui.core": {},
+                "sap.ushell": {},
+                "sap.f": {},
+                "sap.ui.comp": {},
+                "sap.ui.generic.app": {},
+                "sap.suite.ui.generic.template": {},
+                "sap.ovp": {},
+                "sap.ui.rta": {},
+                "sap.ui.layout": {}
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "mtsmidoc.i18n.i18n"
+                }
+            },
+            "mainModel": {
+                "dataSource": "mainService",
+                "preload": true,
+                "settings": {
+                    "defaultBindingMode": "TwoWay",
+                    "defaultCountMode": "Inline",
+                    "refreshAfterChange": false,
+                    "metadataUrlParams": {
+                        "sap-value-list": "none"
+                    }
+                }
+            },
+            "@i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "uri": "i18n/i18n.properties"
+            }
+        },
+        "resources": {
+            "css": []
+        },
+        "routing": {
+            "config": {},
+            "routes": [],
+            "targets": {}
+        }
+    },
+    "sap.ovp": {
+        "globalFilterModel": "mainModel",
+        "globalFilterEntityType": "ZMT_SM_C_IDOC_DSHBType",
+        "containerLayout": "resizable",
+        "enableLiveFilter": true,
+        "considerAnalyticalParameters": false,
+        "cards": {
+            "smcard00": {
+                "model": "mainModel",
+                "template": "sap.ovp.cards.list",
+                "settings": {
+                    "title": "Error in issue",
+                    "entitySet": "ZMT_SM_C_IDOC_DSHB",
+                    "listType": "condensed",
+                    "listFlavor": "bar",
+                    "sortOrder": "descending",
+                    "sortBy": "TotalIssues"
+                }
+            },
+
+            "smcard01": {
+                "model": "mainModel",
+                "template": "sap.ovp.cards.list",
+                "settings": {
+                    "title": "Error in issue",
+                    "entitySet": "ZMT_SM_C_IDOC_DSHB",
+                    "listType": "condensed",
+                    "listFlavor": "bar",
+                    "sortOrder": "descending",
+                    "sortBy": "TotalIssues"
+                }
+            }  
+            
+            ,
+            "card02": {
+                "model": "mainModel",
+                "template": "sap.ovp.cards.charts.analytical",
+                "settings": {
+                    "title": "Issues by category",
+                    "entitySet": "ZMT_SM_C_IDOC_DSHB",
+                    "subTitle": "IDOC issue",
+                    "chartAnnotationPath" : "com.sap.vocabularies.UI.v1.Chart#spiderman"
+                }
+            }            
+
+            
+        }
+    },
+    "sap.fiori": {
+        "registrationIds": [],
+        "archeType": "analytical"
+    }
+}
